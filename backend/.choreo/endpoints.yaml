@@ -1,54 +1,39 @@
-openapi: 3.0.0
-info:
-  version: "1.0.0"
-  title: "Fresh Rotten Fruits Classifier API"
-  description: "API for classifying fresh and rotten fruits using a pre-trained TensorFlow model."
+# +required Version of the endpoint configuration YAML
+version: 0.1
 
-paths:
-  /:
-    get:
-      summary: "Get a greeting message"
-      responses:
-        "200":
-          description: "Successful response"
-          content:
-            text/plain:
-              schema:
-                type: "string"
-      tags:
-        - "Greeting"
+# +required List of endpoints to create
+endpoints:
+  # +required Unique name for the endpoint. (This name will be used when generating the managed API)
+  - name: Fruit Classifier API
+    # +required Numeric port value that gets exposed via this endpoint
+    port: 8080
+    # +required Type of the traffic this endpoint is accepting. Example: REST, GraphQL, etc.
+    # Allowed values: REST, GraphQL, GRPC, UDP, TCP
+    type: REST
+    # +optional Network level visibility of this endpoint. Defaults to Project
+    # Accepted values: Project|Organization|Public.
+    networkVisibility: Public
+    # +optional Context (base path) of the API that is exposed via this endpoint.
+    # This is mandatory if the endpoint type is set to REST or GraphQL.
+    context: /api
+    # +optional Path to the schema definition file. Defaults to wild card route if not provided
+    # This is only applicable to REST endpoint types.
+    # The path should be relative to the docker context.
+    # schemaFilePath: fruit_classifier_openapi.yaml
 
-  /api:
-    post:
-      summary: "Process an image and classify fresh or rotten fruit"
-      requestBody:
-        required: true
-        content:
-          multipart/form-data:
-            schema:
-              type: "object"
-              properties:
-                image:
-                  type: "string"
-                  format: "binary"
-      responses:
-        "200":
-          description: "Successful response"
-          content:
-            application/json:
-              schema:
-                type: "object"
-                properties:
-                  result:
-                    type: "string"
-                    description: "Classified result (Fresh or Rotten)"
-      tags:
-        - "Image Processing"
-
-components:
-  schemas:
-    ErrorResponse:
-      type: "object"
-      properties:
-        message:
-          type: "string"
+  - name: Fruit Classifier Home
+    # +required Numeric port value that gets exposed via this endpoint
+    port: 8080
+    # +required Type of the traffic this endpoint is accepting. Example: REST, GraphQL, etc.
+    # Allowed values: REST, GraphQL, GRPC, UDP, TCP
+    type: REST
+    # +optional Network level visibility of this endpoint. Defaults to Project
+    # Accepted values: Project|Organization|Public.
+    networkVisibility: Public
+    # +optional Context (base path) of the API that is exposed via this endpoint.
+    # This is mandatory if the endpoint type is set to REST or GraphQL.
+    context: /
+    # +optional Path to the schema definition file. Defaults to wild card route if not provided
+    # This is only applicable to REST endpoint types.
+    # The path should be relative to the docker context.
+    # schemaFilePath: fruit_classifier_openapi.yaml
