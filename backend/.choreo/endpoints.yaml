@@ -1,4 +1,4 @@
-swagger: "2.0"
+openapi: 3.0.0
 info:
   version: "1.0.0"
   title: "Fresh Rotten Fruits Classifier API"
@@ -9,39 +9,46 @@ paths:
     get:
       summary: "Get a greeting message"
       responses:
-        200:
+        "200":
           description: "Successful response"
-          schema:
-            type: "string"
+          content:
+            text/plain:
+              schema:
+                type: "string"
       tags:
         - "Greeting"
 
   /api:
     post:
       summary: "Process an image and classify fresh or rotten fruit"
-      consumes:
-        - "multipart/form-data"
-      parameters:
-        - in: "formData"
-          name: "image"
-          type: "string"
-          format: "binary"
-          description: "Base64-encoded image data"
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: "object"
+              properties:
+                image:
+                  type: "string"
+                  format: "binary"
       responses:
-        200:
+        "200":
           description: "Successful response"
-          schema:
-            type: "object"
-            properties:
-              result:
-                type: "string"
-                description: "Classified result (Fresh or Rotten)"
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  result:
+                    type: "string"
+                    description: "Classified result (Fresh or Rotten)"
       tags:
         - "Image Processing"
 
-definitions:
-  ErrorResponse:
-    type: "object"
-    properties:
-      message:
-        type: "string"
+components:
+  schemas:
+    ErrorResponse:
+      type: "object"
+      properties:
+        message:
+          type: "string"
