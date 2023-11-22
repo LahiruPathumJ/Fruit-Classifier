@@ -1,0 +1,7 @@
+flask
+scikit-learn
+tensorflow==2.15.0
+numpy
+scikit-image
+gunicorn
+keras==2.15.0

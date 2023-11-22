@@ -1,0 +1,47 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: "Fresh Rotten Fruits Classifier API"
+  description: "API for classifying fresh and rotten fruits using a pre-trained TensorFlow model."
+
+paths:
+  /:
+    get:
+      summary: "Get a greeting message"
+      responses:
+        200:
+          description: "Successful response"
+          schema:
+            type: "string"
+      tags:
+        - "Greeting"
+
+  /api:
+    post:
+      summary: "Process an image and classify fresh or rotten fruit"
+      consumes:
+        - "multipart/form-data"
+      parameters:
+        - in: "formData"
+          name: "image"
+          type: "string"
+          format: "binary"
+          description: "Base64-encoded image data"
+      responses:
+        200:
+          description: "Successful response"
+          schema:
+            type: "object"
+            properties:
+              result:
+                type: "string"
+                description: "Classified result (Fresh or Rotten)"
+      tags:
+        - "Image Processing"
+
+definitions:
+  ErrorResponse:
+    type: "object"
+    properties:
+      message:
+        type: "string"
