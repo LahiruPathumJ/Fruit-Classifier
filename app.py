@@ -21,10 +21,6 @@ def process():
     file = request.files['img'].read()
     npimg = np.frombuffer(file, np.uint8)
     original_image = Image.open(io.BytesIO(npimg))
-    
-    # image_data = request.form['image']
-    # image_bytes = base64.b64decode(image_data)
-    # original_image = Image.open(io.BytesIO(image_bytes))
 
     resized_image = original_image.resize((64, 64))
     reshaped_image = np.reshape(resized_image, (1, 64, 64, 3))
