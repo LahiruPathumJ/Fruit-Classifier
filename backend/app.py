@@ -14,7 +14,7 @@ app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes in the app
 
 # Load the pre-trained TensorFlow model
-model = load_model('./ex5/Fresh_Rotten_fruis.h5')
+model = load_model('./Fresh_Rotten_fruis.h5')
 
 @app.route('/')
 def index():
