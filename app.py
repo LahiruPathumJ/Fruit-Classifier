@@ -42,10 +42,8 @@ def predict_with_model(input_data):
     classes = ['Fresh Apple','Fresh Banana','Fresh Orange','Rotten Apple','Rotten Banana','Rotten Orange']
     predictions = model.predict(input_data)
 
-    for i in range(6):
-      if predictions.tolist()[0][i] == 1:
-        break
-    prediction = classes[i]
+    predicted_class_index = np.argmax(predictions)
+    prediction = classes[predicted_class_index]
     print(prediction)
     print(predictions.tolist())
 
